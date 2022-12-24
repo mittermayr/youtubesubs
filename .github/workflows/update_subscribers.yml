@@ -1,0 +1,16 @@
+name: SubscriberCheck
+on:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run a one-line script
+      - run: |
+          python check_and_update.py
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add subscriber_count.txt
+          git commit -m "updated"
+          git push
