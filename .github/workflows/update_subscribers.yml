@@ -19,6 +19,4 @@ jobs:
             git add view_count.txt          
             git commit -m "${commitmessage}"
             git push
-          else
-            # No changes
           fi
