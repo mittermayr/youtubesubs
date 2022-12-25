@@ -13,6 +13,12 @@ jobs:
           python check_and_update.py ${{ secrets.YOUTUBE_CHANNEL_ID }} ${{ secrets.YOUTUBE_API_KEY }}
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add subscriber_count.txt
-          git commit -m "updated"
-          git push
+          if [[ `git status --porcelain` ]]; then
+            commitmessage="Data updated on $(date +%Y%m%d)"
+            git add subscriber_count.txt
+            git add view_count.txt          
+            git commit -m "${commitmessage}"
+            git push
+          else
+            # No changes
+          fi
